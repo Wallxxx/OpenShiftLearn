@@ -15,6 +15,7 @@ spec:
       containers:
         - name: {{ .Release.Name }}-container
           image: OpenShiftLearn:latest
+          privileged: false
           resources:
             limits:
               cpu: "90%"
