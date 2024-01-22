@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: OpenShiftLearn
+  tag: latest
+
+resources:
+  limits:
+    cpu: "90%"
+    memory: "10Gi"
