@@ -12,10 +12,12 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      serviceAccountName: my-service-account
+      securityContextConstraints:
+        - my-scc
       containers:
         - name: {{ .Release.Name }}-container
           image: OpenShiftLearn:latest
-          privileged: false
           resources:
             limits:
               cpu: "90%"
