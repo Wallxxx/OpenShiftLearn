@@ -19,7 +19,7 @@ pipeline {
         stage('Build docker-image') {
             steps {
                 script {
-                    docker.build('openshiftlearn:latest')
+                    sh 'docker build -t openshiftlearn:latest .'
                 }
             }
         }
@@ -29,6 +29,9 @@ pipeline {
                 script {
                     sh 'oc login --token=${OPENSHIFT_TOKEN} --server=${OPENSHIFT_SERVER}'
                     sh 'oc project ${OPENSHIFT_PROJECT}'
+                    sh 'oc registry login'
+                    sh 'docker tag openshiftlearn:latest default-route-openshift-image-registry.apps.sandbox-m2.ll9k.p1.openshiftapps.com/panaceea-dev/openshiftlearn:latest'
+                    sh 'docker push default-route-openshift-image-registry.apps.sandbox-m2.ll9k.p1.openshiftapps.com/panaceea-dev/openshiftlearn:latest'
                 }
             }
         }
