@@ -12,7 +12,7 @@ pipeline {
         stage('Build docker-image') {
             steps {
                 script {
-                    docker.build('OpenShiftLearn:latest')
+                    docker.build('openshiftlearn:latest')
                 }
             }
         }

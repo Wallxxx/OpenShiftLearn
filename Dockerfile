@@ -1,5 +1,5 @@
 # Base JDK image
-from adoptopenjdk:17-jre-hotspot
+from openjdk:17
 
 # Set work directory
 workdir /app
@@ -10,5 +10,5 @@ copy target/OpenShiftLearn-1.0.jar /app/application.jar
 # Start command
 cmd ["java", "-jar", "application.jar"]
 
-# Build: docker build -t OpenShiftLearn:latest .
-# Local test: docker run -p 8080:8080 OpenShiftLearn:latest
+# Build: docker build -t openshiftlearn:latest .
+# Local test: docker run -p 8080:8080 openshiftlearn:latest
