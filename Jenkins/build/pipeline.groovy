@@ -1,14 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clone git repo') {
-            steps {
-                script {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Wallxxx/OpenShiftLearn.git']]])
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 script {
