@@ -2,6 +2,8 @@ pipeline {
     agent any
 
     environment {
+        OPENSHIFT_SERVER = 'https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443'
+        OPENSHIFT_PROJECT = 'panaceea-dev'
         OPENSHIFT_TOKEN = credentials('665d17de-95b3-428d-b1c0-466a16f6a1ad')
     }
 
@@ -25,10 +27,8 @@ pipeline {
         stage('Push image to registry') {
             steps {
                 script {
-                    openshiftLogin(
-                            serverUrl: 'https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443',
-                            token: env.OPENSHIFT_TOKEN
-                    )
+                    sh 'oc login --token=${OPENSHIFT_TOKEN} --server=${OPENSHIFT_SERVER}'
+                    sh 'oc project ${OPENSHIFT_PROJECT}'
                 }
             }
         }
