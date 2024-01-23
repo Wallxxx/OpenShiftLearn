@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        OPENSHIFT_TOKEN = credentials('665d17de-95b3-428d-b1c0-466a16f6a1ad')
+    }
+
     stages {
         stage('Build java application') {
             steps {
@@ -13,6 +18,17 @@ pipeline {
             steps {
                 script {
                     docker.build('openshiftlearn:latest')
+                }
+            }
+        }
+
+        stage('Push image to registry') {
+            steps {
+                script {
+                    openshiftLogin(
+                            serverUrl: 'https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443',
+                            token: env.OPENSHIFT_TOKEN
+                    )
                 }
             }
         }
