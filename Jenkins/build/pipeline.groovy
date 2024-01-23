@@ -1,10 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build java application') {
             steps {
                 script {
                     sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Build docker-image') {
+            steps {
+                script {
+                    docker.build('OpenShiftLearn:latest')
                 }
             }
         }
